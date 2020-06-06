@@ -8,7 +8,7 @@ mongoDB is a database that allows you to save json documents and is highly scala
 
 ## Example
 
-You need to allow unstable, read, write, net and plugin for mongo to work as the mongo client library need to download a native plugin for it to work. The env permission is used to read the mongo configuration url and database name from your local environment.
+You need to allow unstable, read, write, net and plugin for mongo to work as the mongo client library needs to download a native plugin for it to work. The env permission is used to read the mongo configuration url and database name from your local environment.
  
 ```shell
 denon run --unstable --allow-read --allow-write --allow-env --allow-net --allow-plugin src/repository.ts
