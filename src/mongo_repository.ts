@@ -24,11 +24,11 @@ export class MongoRepository<ENTITY extends { _id: ObjectId | undefined }> imple
         return this.collection.findOne({"_id": id});
     }
 
-    save(entity: ENTITY): Promise<ENTITY> {
+    save(entity: ENTITY): Promise<ObjectId> {
         return this.collection.insertOne(entity);
     }
 
-    saveAll(...entities: ENTITY[]): Promise<ENTITY[]> {
+    saveAll(...entities: ENTITY[]): Promise<ObjectId[]> {
         return this.collection.insertMany(entities);
     }
 }

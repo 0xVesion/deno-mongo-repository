@@ -5,7 +5,7 @@ export interface Repository<ENTITY, ID> {
 
     findById(id: ID): Promise<ENTITY>;
 
-    save(entity: ENTITY): Promise<ENTITY>;
+    save(entity: ENTITY): Promise<ID>;
 
-    saveAll(...entities: ENTITY[]): Promise<ENTITY[]>;
+    saveAll(...entities: ENTITY[]): Promise<ID[]>;
 }
