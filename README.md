@@ -1,4 +1,4 @@
-# Deno IFTTT
+# Mongo Repository
 
 This library makes integrating mongo db in your project easy.
 
@@ -15,8 +15,8 @@ denon run --unstable --allow-read --allow-write --allow-env --allow-net --allow-
 ```
 
 ```ts
-import { MongoRepository } from "https://raw.githubusercontent.com/0xVesion/deno-mongo-repository/master/mod.ts";
-export { MongoClient, Database, ObjectId } from "https://deno.land/x/mongo/mod.ts";
+import { MongoRepository } from "https://deno.land/x/mongo@v0.7.0/mod.ts";
+export { MongoClient, Database, ObjectId } from "https://deno.land/x/mongo@v0.7.0/mod.ts";
 
 const client = new MongoClient();
 client.connectWithUri(Deno.env.get("MONGO_URL") || "");
