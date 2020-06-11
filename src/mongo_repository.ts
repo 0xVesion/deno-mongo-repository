@@ -3,9 +3,11 @@ import {Repository} from './repository.ts';
 
 export class MongoRepository<ENTITY extends { _id: ObjectId | undefined }> implements Repository<ENTITY, ObjectId> {
     private readonly collection: MongoCollection;
+    private readonly name: string;
 
     constructor(db: MongoDatabase, clazz: new (...a: any[]) => ENTITY) {
-        this.collection = db.collection(clazz.name);
+        this.name = clazz.name;
+        this.collection = db.collection(this.name);
     }
 
     async deleteById(id: ObjectId): Promise<void> {
@@ -24,11 +26,25 @@ export class MongoRepository<ENTITY extends { _id: ObjectId | undefined }> imple
         return this.collection.findOne({"_id": id});
     }
 
-    save(entity: ENTITY): Promise<ObjectId> {
-        return this.collection.insertOne(entity);
+    async save(entity: ENTITY): Promise<ObjectId> {
+        if(entity._id) {
+            const result = await this.collection.updateOne({_id: entity._id}, entity);
+
+            if(result.modifiedCount !== 1) {
+                throw new Error(`Error whilst updating ${this.entityToString(entity)}`);
+            }
+
+            return entity._id;
+        } else {
+            return this.collection.insertOne(entity);
+        }
     }
 
     saveAll(...entities: ENTITY[]): Promise<ObjectId[]> {
-        return this.collection.insertMany(entities);
+        return Promise.all(entities.map((e) => this.save(e)));
+    }
+
+    private entityToString(entity: T): string {
+        return `${this.name}(${entity._id.$oid})`;
     }
 }
