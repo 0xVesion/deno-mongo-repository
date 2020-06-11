@@ -44,7 +44,7 @@ export class MongoRepository<ENTITY extends { _id: ObjectId | undefined }> imple
         return Promise.all(entities.map((e) => this.save(e)));
     }
 
-    private entityToString(entity: T): string {
-        return `${this.name}(${entity._id.$oid})`;
+    private entityToString(entity: ENTITY): string {
+        return `${this.name}(${entity._id?.$oid})`;
     }
 }
