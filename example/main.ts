@@ -1,5 +1,5 @@
-import { MongoRepository } from "https://deno.land/x/mongo_repository@v0.7.0/mod.ts";
-export { MongoClient, Database, ObjectId } from "https://deno.land/x/mongo@v0.7.0/mod.ts";
+import { MongoRepository } from "https://deno.land/x/mongo_repository@v0.8.0/mod.ts";
+export { MongoClient, Database, ObjectId } from "https://deno.land/x/mongo@v0.8.0/mod.ts";
 
 const client = new MongoClient();
 client.connectWithUri(Deno.env.get("MONGO_URL") || "");
